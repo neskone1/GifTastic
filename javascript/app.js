@@ -38,10 +38,10 @@ $(document).ready(function() {
           //console.log(results);
           //empties the div before adding more gifs
           $('#comedians-view').empty();
-          for ( let j=0; j < results.length; j++) {
-                      var imageDiv = $('<div>');
-                      var imageView = results[j].images.fixed_height.url;
-                      var still = results[j].images.fixed_height_still.url;
+          for ( let i=0; i < results.length; i++) {
+                      let imageDiv = $('<div>');
+                      const imageView = results[i].images.fixed_height.url;
+                      const still = results[i].images.fixed_height_still.url;
                           // console.log(imageView);  
   
           const gifImage = $('<img>').attr("src", still).attr('data-animate', imageView).attr('data-still', still);
@@ -50,7 +50,7 @@ $(document).ready(function() {
                       gifImage.on('click', playGif);
   
           // Pulling ratings for each actor
-        const rating = results[j].rating;
+        const rating = results[i].rating;
               // console.log(rating);
           const displayRated= $('<p>').text("Rating: " + rating);
           $('#comedians-view').prepend(displayRated);
@@ -72,12 +72,14 @@ $(document).ready(function() {
   
                   } //end of on click function
   
-        }); //end of document on click 
+        }); 
   
             //adding new button to array
-          $(document).on('click', '#add-actors', function(){
+          $(document).on('click', '#add-actors', function(event){
+            event.preventDefault();
+
               if ($('#actors-input').val().trim() == ''){
-                alert('Input can not be left blank');
+                alert('write the name of your favorite comedian');
              }
              else {
               const actors = $('#actors-input').val().trim();
